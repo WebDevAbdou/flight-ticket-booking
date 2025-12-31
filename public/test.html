@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .success { color: green; }
+        .error { color: red; }
+        pre {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Flight Booking System - API Test</h1>
+    
+    <div class="test-section">
+        <h2>1. Test API Connection</h2>
+        <button onclick="testHealth()">Test Health Endpoint</button>
+        <div id="health-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>2. Test Flights API</h2>
+        <button onclick="testFlights()">Get All Flights</button>
+        <div id="flights-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>3. Test Origins API</h2>
+        <button onclick="testOrigins()">Get Origins</button>
+        <div id="origins-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>4. Test Register API</h2>
+        <button onclick="testRegister()">Test Registration</button>
+        <div id="register-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>5. Console Logs</h2>
+        <div id="console-logs"></div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:3000/api';
+        const logs = [];
+
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            logs.push(`[${timestamp}] ${type.toUpperCase()}: ${message}`);
+            updateConsoleLogs();
+            console.log(message);
+        }
+
+        function updateConsoleLogs() {
+            document.getElementById('console-logs').innerHTML = 
+                '<pre>' + logs.join('\n') + '</pre>';
+        }
+
+        async function testHealth() {
+            const resultDiv = document.getElementById('health-result');
+            resultDiv.innerHTML = 'Testing...';
+            log('Testing health endpoint...');
+            
+            try {
+                const response = await fetch(`${API_URL}/health`);
+                const data = await response.json();
+                
+                resultDiv.innerHTML = `
+                    <p class="success">✅ Success!</p>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+                log('Health check passed', 'success');
+            } catch (error) {
+                resultDiv.innerHTML = `<p class="error">❌ Error: ${error.message}</p>`;
+                log(`Health check failed: ${error.message}`, 'error');
+            }
+        }
+
+        async function testFlights() {
+            const resultDiv = document.getElementById('flights-result');
+            resultDiv.innerHTML = 'Testing...';
+            log('Testing flights endpoint...');
+            
+            try {
+                const response = await fetch(`${API_URL}/flights`);
+                const data = await response.json();
+                
+                if (data.success && data.flights) {
+                    resultDiv.innerHTML = `
+                        <p class="success">✅ Success! Found ${data.flights.length} flights</p>
+                        <pre>${JSON.stringify(data.flights.slice(0, 2), null, 2)}</pre>
+                        <p>... and ${data.flights.length - 2} more flights</p>
+                    `;
+                    log(`Flights loaded: ${data.flights.length} flights`, 'success');
+                } else {
+                    resultDiv.innerHTML = `<p class="error">❌ No flights found</p>`;
+                    log('No flights in response', 'error');
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<p class="error">❌ Error: ${error.message}</p>`;
+                log(`Flights test failed: ${error.message}`, 'error');
+            }
+        }
+
+        async function testOrigins() {
+            const resultDiv = document.getElementById('origins-result');
+            resultDiv.innerHTML = 'Testing...';
+            log('Testing origins endpoint...');
+            
+            try {
+                const response = await fetch(`${API_URL}/flights/origins`);
+                const data = await response.json();
+                
+                resultDiv.innerHTML = `
+                    <p class="success">✅ Success!</p>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+                log('Origins loaded successfully', 'success');
+            } catch (error) {
+                resultDiv.innerHTML = `<p class="error">❌ Error: ${error.message}</p>`;
+                log(`Origins test failed: ${error.message}`, 'error');
+            }
+        }
+
+        async function testRegister() {
+            const resultDiv = document.getElementById('register-result');
+            resultDiv.innerHTML = 'Testing...';
+            log('Testing register endpoint...');
+            
+            const testUser = {
+                fullName: 'Test User ' + Date.now(),
+                email: `test${Date.now()}@example.com`,
+                phone: '1234567890',
+                password: 'password123'
+            };
+            
+            try {
+                const response = await fetch(`${API_URL}/auth/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(testUser)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    resultDiv.innerHTML = `
+                        <p class="success">✅ Registration Success!</p>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                    log('Registration successful', 'success');
+                } else {
+                    resultDiv.innerHTML = `
+                        <p class="error">❌ Registration Failed</p>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                    log(`Registration failed: ${data.message}`, 'error');
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<p class="error">❌ Error: ${error.message}</p>`;
+                log(`Registration test failed: ${error.message}`, 'error');
+            }
+        }
+
+        // Auto-run tests on load
+        window.onload = () => {
+            log('Page loaded, running auto-tests...');
+            setTimeout(testHealth, 500);
+            setTimeout(testFlights, 1000);
+            setTimeout(testOrigins, 1500);
+        };
+    </script>
+</body>
+</html>
+

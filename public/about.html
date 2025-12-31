@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Flight Booking System</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .about-section {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--light-bg);
+            border-radius: 0.5rem;
+        }
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">✈️ FlightBook</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li id="navAuth">
+                    <a href="/login" class="btn btn-primary">Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>About FlightBook</h1>
+        <p>Your trusted partner for flight bookings</p>
+    </section>
+
+    <!-- About Content -->
+    <div class="container">
+        <div class="about-section">
+            <h2>Our Mission</h2>
+            <p>FlightBook is a comprehensive flight booking system designed to make travel planning simple, efficient, and accessible. Our platform connects travelers with flights worldwide, offering a seamless booking experience from search to confirmation.</p>
+        </div>
+
+        <div class="about-section">
+            <h2>Why Choose Us?</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Easy Search</h3>
+                    <p>Find flights quickly with our advanced search filters</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💳</div>
+                    <h3>Secure Payment</h3>
+                    <p>Safe and secure payment processing</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Instant Confirmation</h3>
+                    <p>Get instant booking confirmation and receipts</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎫</div>
+                    <h3>Manage Bookings</h3>
+                    <p>View and manage all your bookings in one place</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <h2>Project Information</h2>
+            <p>This Flight Booking System is developed as a final year project for a Database Course. It demonstrates the practical application of database design principles, including:</p>
+            <ul style="margin-left: 2rem; margin-top: 1rem;">
+                <li>Normalized relational database design</li>
+                <li>CRUD operations (Create, Read, Update, Delete)</li>
+                <li>Transaction management and data integrity</li>
+                <li>User authentication and authorization</li>
+                <li>Real-world business logic implementation</li>
+            </ul>
+        </div>
+
+        <div class="about-section">
+            <h2>Technology Stack</h2>
+            <p><strong>Frontend:</strong> HTML5, CSS3, JavaScript</p>
+            <p><strong>Backend:</strong> Node.js, Express.js</p>
+            <p><strong>Database:</strong> MySQL</p>
+            <p><strong>Authentication:</strong> JWT (JSON Web Tokens)</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 FlightBook. All rights reserved. | Database Course Final Year Project</p>
+    </footer>
+
+    <script src="/js/auth.js"></script>
+</body>
+</html>
+

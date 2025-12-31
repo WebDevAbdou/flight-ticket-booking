@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug - Flight Booking</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Debug Page</h1>
+        <div id="status"></div>
+        <div id="flights-container"></div>
+    </div>
+
+    <script>
+        console.log('=== DEBUG PAGE LOADED ===');
+        
+        const statusDiv = document.getElementById('status');
+        const flightsContainer = document.getElementById('flights-container');
+        
+        statusDiv.innerHTML = '<p>Loading...</p>';
+        
+        // Test 1: Check if we can fetch
+        console.log('Test 1: Fetching flights...');
+        
+        fetch('http://localhost:3000/api/flights')
+            .then(response => {
+                console.log('Response received:', response.status);
+                return response.json();
+            })
+            .then(data => {
+                console.log('Data received:', data);
+                
+                if (data.success && data.flights) {
+                    statusDiv.innerHTML = `<p style="color: green;">✅ SUCCESS! Found ${data.flights.length} flights</p>`;
+                    
+                    // Display flights
+                    data.flights.forEach(flight => {
+                        const div = document.createElement('div');
+                        div.style.border = '1px solid #ddd';
+                        div.style.padding = '10px';
+                        div.style.margin = '10px 0';
+                        div.innerHTML = `
+                            <h3>${flight.airline} - ${flight.flight_number}</h3>
+                            <p>${flight.origin} → ${flight.destination}</p>
+                            <p>Price: $${flight.price}</p>
+                            <p>Seats: ${flight.available_seats}</p>
+                        `;
+                        flightsContainer.appendChild(div);
+                    });
+                } else {
+                    statusDiv.innerHTML = '<p style="color: red;">❌ No flights found</p>';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                statusDiv.innerHTML = `<p style="color: red;">❌ Error: ${error.message}</p>`;
+            });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt - Flight Booking System</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .receipt-container {
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+        .receipt-header {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            border-radius: 1rem 1rem 0 0;
+        }
+        .receipt-body {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0 0 1rem 1rem;
+        }
+        .receipt-section {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .receipt-section:last-child {
+            border-bottom: none;
+        }
+        .receipt-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        .receipt-label {
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+        .receipt-value {
+            color: var(--dark-text);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">✈️ FlightBook</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li>
+                    <button id="logoutBtn" class="btn btn-danger">Logout</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Receipt Content -->
+    <div class="container">
+        <div class="receipt-container">
+            <div class="receipt-header">
+                <h1>✓ Booking Confirmed!</h1>
+                <p>Your flight has been successfully booked</p>
+            </div>
+
+            <div class="receipt-body">
+                <div id="receiptContent"></div>
+
+                <div class="text-center mt-2">
+                    <button id="downloadBtn" class="btn btn-primary">Download Receipt (PDF)</button>
+                    <a href="/dashboard" class="btn btn-secondary">View All Bookings</a>
+                    <a href="/" class="btn btn-outline">Book Another Flight</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 FlightBook. All rights reserved.</p>
+    </footer>
+
+    <script src="/js/auth.js"></script>
+    <script src="/js/receipt.js"></script>
+</body>
+</html>
+

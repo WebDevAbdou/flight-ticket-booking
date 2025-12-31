@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dashboard - Flight Booking System</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+        }
+        .booking-status {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        .status-pending {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+        .status-confirmed {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+        .status-cancelled {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">✈️ FlightBook</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li>
+                    <button id="logoutBtn" class="btn btn-danger">Logout</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <div class="container">
+        <div class="dashboard-header">
+            <h1>My Dashboard</h1>
+            <p id="welcomeMessage">Welcome back!</p>
+        </div>
+
+        <div id="alertMessage"></div>
+
+        <h2 class="mb-1">My Bookings</h2>
+        
+        <div id="loadingSpinner">
+            <div class="spinner"></div>
+        </div>
+
+        <div id="bookingsList"></div>
+
+        <div id="noBookings" class="hidden">
+            <div class="card text-center">
+                <p>You don't have any bookings yet.</p>
+                <a href="/" class="btn btn-primary mt-1">Browse Flights</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 FlightBook. All rights reserved.</p>
+    </footer>
+
+    <script src="/js/auth.js"></script>
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>
+

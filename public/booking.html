@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Flight - Flight Booking System</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">✈️ FlightBook</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li>
+                    <button id="logoutBtn" class="btn btn-danger">Logout</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Booking Content -->
+    <div class="container">
+        <h1 class="mb-2">Book Your Flight</h1>
+
+        <div id="alertMessage"></div>
+
+        <!-- Flight Details -->
+        <div class="card">
+            <h2 class="card-title">Flight Details</h2>
+            <div id="flightDetails"></div>
+        </div>
+
+        <!-- Passenger Information Form -->
+        <div class="card mt-2">
+            <h2 class="card-title">Passenger Information</h2>
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label for="passengerName">Full Name</label>
+                    <input type="text" id="passengerName" name="passengerName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="passengerEmail">Email Address</label>
+                    <input type="email" id="passengerEmail" name="passengerEmail" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="passengerPhone">Phone Number</label>
+                    <input type="tel" id="passengerPhone" name="passengerPhone" required>
+                </div>
+
+                <div class="mt-2">
+                    <button type="submit" class="btn btn-primary">Proceed to Payment</button>
+                    <a href="/" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 FlightBook. All rights reserved.</p>
+    </footer>
+
+    <script src="/js/auth.js"></script>
+    <script src="/js/booking.js"></script>
+</body>
+</html>
+

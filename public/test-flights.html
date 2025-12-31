@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Flights Loading</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .flight { border: 1px solid #ddd; padding: 10px; margin: 10px 0; }
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+    <h1>Flight Loading Test</h1>
+    <div id="status"></div>
+    <div id="flights"></div>
+
+    <script>
+        console.log('Test page loaded');
+        
+        const statusDiv = document.getElementById('status');
+        const flightsDiv = document.getElementById('flights');
+        
+        statusDiv.innerHTML = '<p>Loading flights...</p>';
+        
+        fetch('http://localhost:3000/api/flights')
+            .then(response => {
+                console.log('Response status:', response.status);
+                return response.json();
+            })
+            .then(data => {
+                console.log('Data received:', data);
+                
+                if (data.success && data.flights && data.flights.length > 0) {
+                    statusDiv.innerHTML = `<p class="success">✅ Loaded ${data.count} flights</p>`;
+                    
+                    data.flights.forEach(flight => {
+                        const div = document.createElement('div');
+                        div.className = 'flight';
+                        div.innerHTML = `
+                            <h3>${flight.airline} - ${flight.flight_number}</h3>
+                            <p>${flight.origin} → ${flight.destination}</p>
+                            <p>Economy: $${flight.economy_price} | Business: $${flight.business_price} | First: $${flight.first_class_price}</p>
+                        `;
+                        flightsDiv.appendChild(div);
+                    });
+                } else {
+                    statusDiv.innerHTML = '<p class="error">❌ No flights found</p>';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                statusDiv.innerHTML = `<p class="error">❌ Error: ${error.message}</p>`;
+            });
+    </script>
+</body>
+</html>
+
