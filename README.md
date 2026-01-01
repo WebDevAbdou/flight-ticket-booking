@@ -1,6 +1,6 @@
 # Flight Ticket Booking System
 
-A comprehensive flight booking web application built with JavaScript (Node.js/Express) and MySQL for a Database Course Final Year Project.
+A comprehensive flight booking web application built with JavaScript (Node.js/Express) and MySQL for a Database Project.
 
 ## 🎯 Project Overview
 
@@ -297,11 +297,11 @@ This is an academic project. For improvements or bug fixes, please create an iss
 
 ## 📄 License
 
-This project is created for educational purposes as a Database Course Final Year Project.
+This project is created for educational purposes as a Database Course Project.
 
 ## 👤 Author
 
-Database Course Final Year Project
+Database Project
 
 ## 🙏 Acknowledgments
 
